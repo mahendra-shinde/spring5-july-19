@@ -87,8 +87,7 @@
     ```java
     public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-		Address add = context.getBean("add", Address.class);
-
+		
 		// Get Bean of Type Employee AND ID emp
 		Employee emp = context.getBean("emp", Employee.class);
 
