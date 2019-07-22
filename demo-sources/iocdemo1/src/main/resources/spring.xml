@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<bean id="emp" class="com.cg.iocdemo1.Employee">
+		<property name="firstName" value="Donald" />
+		<property name="lastName" value="Trumph" />
+		<property name="designation" value="POTUS" />
+		<property name="salary" value="1239990" />
+		<property name="contacts">
+			<list>
+				<value>2369869879</value>
+				<value>5765765677</value>
+			</list>
+		</property>
+
+		<property name="address">
+			<bean class="com.cg.iocdemo1.Address">
+			<constructor-arg value="White house" />
+			<constructor-arg value="Washignton DC" />
+			<constructor-arg value="Columbia" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="add" class="com.cg.iocdemo1.Address">
+		<constructor-arg value="White house" />
+		<constructor-arg value="Washignton DC" />
+		<constructor-arg value="Columbia" />
+	</bean>
+	
+</beans>

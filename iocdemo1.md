@@ -5,8 +5,28 @@
 2.  Add dependency in **pom.xml**:  
     
 	Right-click on "pom.xml" and choose _maven_ > _Add Dependency_
-	
+
     `spring-context` version `5.1.6`
+
+	The `pom.xml` should now look like this:
+
+	```xml
+	<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.cg</groupId>
+	<artifactId>iocdemo1</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>iocdemo1</name>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>5.1.6.RELEASE</version>
+		</dependency>
+	</dependencies>
+	</project>
+	```
+
 
 3.  create new java class `com.cg.iocdemo.Address`
 	
@@ -53,7 +73,7 @@
 			</list>
 		</property>
 
-		<property name="add">
+		<property name="address">
 			<bean class="com.cg.iocdemo1.Address">
 			<constructor-arg value="White house" />
 			<constructor-arg value="Washignton DC" />
@@ -80,3 +100,5 @@
 		System.out.println("First Phone: "+emp.getContacts().get(0));
 	}
     ```
+
+> The complete code could be found [here](./demo-sources/iocdemo1) 
