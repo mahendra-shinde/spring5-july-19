@@ -15,10 +15,7 @@
     ```xml
     <context:property-override location="classpath:/person.properties"  />
     <bean id="emp" class="com.cg.iocdemo1.Employee" autowire="byType">
-	<!-- For All properties which are NOT explicitely defined here,
-		IN this example 'address' is not defined.
-		byType:	Matching Property's data type with BEAN class type -->
-		<property name="firstName" value="${emp.fname}" />
+	<property name="firstName" value="${emp.fname}" />
 		<property name="lastName" value="${emp.lname}" />
 		<property name="designation" value="POTUS" />
 		<property name="salary" value="1239990" />
