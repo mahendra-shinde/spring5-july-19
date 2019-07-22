@@ -13,10 +13,11 @@
 3.  Modify "spring.xml" file
 
     ```xml
-    <context:property-override location="classpath:/person.properties"  />
-    <bean id="emp" class="com.cg.iocdemo1.Employee" autowire="byType">
-	<property name="firstName" value="${emp.fname}" />
-		<property name="lastName" value="${emp.lname}" />
+	<context:property-placeholder location="classpath:/person.properties"  />
+	
+	<bean id="emp" class="com.cg.iocdemo1.Employee" autowire="byType">
+		<property name="firstName" value="${emp.firstName}" />
+		<property name="lastName" value="${emp.lastName}" />
 		<property name="designation" value="POTUS" />
 		<property name="salary" value="1239990" />
 		<property name="contacts">
@@ -32,6 +33,8 @@
 		<constructor-arg value="Washignton DC" />
 		<constructor-arg value="${address.city}" />
 	</bean>
+
+	</beans>
 
     ```
 
