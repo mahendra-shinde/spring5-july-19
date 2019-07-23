@@ -24,7 +24,7 @@ No need to define individual bean inside AppConfig. Use @Component, @Repository,
 3.  Create new Java class `com.cg.demo.EmployeeDAO`
 
     ```java   
-    @Repository
+    @Repository("dao")
     public class EmployeeDAO {
         
     }
