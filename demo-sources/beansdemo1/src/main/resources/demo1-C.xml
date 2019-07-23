@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<bean id="dep1" class="com.cg.demo1.c.Department">
+		<property name="name" value="HR" />
+	</bean>
+	<bean id="dep2" class="com.cg.demo1.c.Department">
+		<property name="name" value="Testing" />
+	</bean>
+
+	<bean id="loc" class="com.cg.demo1.c.Location">
+		<property name="address" value="Hinjewadi" />
+		<property name="city" value="Pune" />
+		<property name="depts">
+			<list>
+				<ref bean="dep1" />
+				<ref bean="dep2" />
+				<!-- Example of Nested/Inner bean -->
+				<bean id="dep3" class="com.cg.demo1.c.Department">
+					<property name="name" value="IT Support" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+</beans>
