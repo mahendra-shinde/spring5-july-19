@@ -16,7 +16,7 @@
 ### Steps
 
 1. Modify "home.jsp" page, add hyperlink:
-	```html	
+  ```html	
 	<a href="add-product">Add product</a>
   ```
 
