@@ -85,3 +85,35 @@
 7.  Goto `Application.java` and **Run As Java Application**
 
 8.  Open web browser and visit URL: _http://localhost:3000/_
+
+9.  Create new Entity `com.cg.entities.Product`
+
+    ```java
+    public class Product {
+        private Integer productId;
+        private String name;
+        private String description;
+        private Double price;
+    //... Create Two Constructors, getters and setters 
+    }
+    ```
+
+10. Add new method in `com.cg.controllers.HelloController`
+
+    ```java
+    // URL= http://localhost:3000/products
+	@GetMapping("/products")
+	public List<Product> getProducts(){
+		List<Product> list = new LinkedList<Product>();
+		list.add(new Product(101,"Windows 10 PRO","64Bit OS for Desktop & Laptops",8000D));
+		list.add(new Product(102,"Ubuntu 18.04 Desktop","64Bit OS for Desktop & Laptops",0D));
+		list.add(new Product(103,"Linux Mint 19","64Bit OS for Desktop & Laptops",0D));
+		return list;
+	}
+    ```
+
+11. Stop existing Applications, and Run `Application.java` once again
+
+    Visit URL http://localhost:3000/products
+
+    You should get JSON Array as an output!
