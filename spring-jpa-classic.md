@@ -22,6 +22,7 @@
     3.  spring-tx:5.1.6.RELEASE
     4.  oracle6
     5.  jstl:1.2
+    6.  hibernate-entitymanager:4.2.1.Final
 
     ```xml
     <dependency>
@@ -49,6 +50,11 @@
   		<artifactId>spring-tx</artifactId>
   		<version>5.1.6.RELEASE</version>
   	</dependency>
+    <dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>4.2.1.Final</version>
+	</dependency>
     ```
 
 4.  Right click on projectname > Java EE Tools > Generate Deployment descriptor stub
@@ -106,3 +112,131 @@
 	<tx:annotation-driven transaction-manager="tx"/>
     ```
 
+7.  Create new Entity class `com.cg.entities.Product`
+
+    ```java
+    import javax.persistence.*;
+
+    @Entity
+    @Table(name="products")
+    public class Product {
+        @Id
+        private Integer productId;
+        
+        @Column(name="name",length=20)
+        private String name;
+        
+        @Column(name="description",length=120)
+        private String description;
+        
+        @Column(name="price")
+        private Double price;
+        //... constructor, getters & setters...
+    }
+    ```
+8.  Create an Interface for DAO 'com.cg.dao.ProductDAO`
+
+    ```java
+    public interface ProductDAO {
+        public void save(Product p);
+        public Product findById(Integer productId);
+        public List<Product> findAll();
+    }
+    ```
+9.  Create a DAO Implementation class `com.cg.dao.ProductDAOImpl`
+
+    ```java
+    @Repository
+    public class ProductDAOImpl implements ProductDAO {
+
+        @PersistenceContext
+        private EntityManager em;
+        
+        @Override
+        public void save(Product p) {
+            em.persist(p);
+            em.flush();
+        }
+
+        @Override
+        public Product findById(Integer productId) {
+            return em.find(Product.class, productId);
+        }
+
+        @Override
+        public List<Product> findAll() {
+            Query q = em.createQuery("from Product p");//That's "JPQL" not SQL !!!
+            return q.getResultList();
+        }
+    }
+    ```
+10. Create new Interface `com.cg.services.ProductService`
+
+    ```java
+    public interface ProductService {
+        Product find(int productId);
+        List<Product> getAll();
+        void create(Product p);
+    }
+    ```
+
+11. Create Service Implementation class `com.cg.services.ProductServiceImpl`
+
+    ```java
+    @Service
+    @Transactional
+    public class ProductServiceImpl implements ProductService {
+
+        @Autowired private ProductDAO dao;
+        
+        @Transactional(readOnly=true)
+        @Override
+        public Product find(int productId) {
+            return dao.findById(productId);
+        }
+
+        @Transactional(readOnly=true)
+        @Override
+        public List<Product> getAll() {
+            return dao.findAll();
+        }
+
+        @Transactional(propagation=Propagation.REQUIRED)
+        @Override
+        public void create(Product p) {
+            dao.save(p);
+        }
+
+    }
+    ```
+
+12. Create new Rest Controller `com.cg.controllers.ProductController`
+
+    ```java
+    @RestController
+    public class ProductController {
+        
+        @Autowired private ProductService service;
+        
+        @GetMapping("/")
+        public String createSample() {
+            Product p1 = new Product(101,"Windows 10 PRO","64Bit OS for Desktop & Laptops",8000D);
+            Product p2 = new Product(102,"Ubuntu 18.04 Desktop","64Bit OS for Desktop & Laptops",0D);
+            Product p3 = new Product(103,"Linux Mint 19","64Bit OS for Desktop & Laptops",0D);
+            service.create(p1);
+            service.create(p2);
+            service.create(p3);
+            return "Three products created!";
+        }
+        
+        @GetMapping("/list")
+        public List<Product> getAll(){
+            return service.getAll();
+        }
+    }
+    ```
+
+13. Run Application on Tomcat 8 and Wait for browser window to open
+
+    Once browser shows message "Three products created!" , verify record from sql-plus.
+    Try URL /list to get all records
