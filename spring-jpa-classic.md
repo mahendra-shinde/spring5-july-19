@@ -51,10 +51,17 @@
   		<version>5.1.6.RELEASE</version>
   	</dependency>
     <dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.2.1.Final</version>
-	</dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-entitymanager</artifactId>
+        <version>5.3.9.Final</version>
+    </dependency>
+
+    <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>2.9.9</version>
+        <type>jar</type>
+    </dependency>
     ```
 
 4.  Right click on projectname > Java EE Tools > Generate Deployment descriptor stub
@@ -88,7 +95,7 @@
 	</mvc:view-resolvers>
 	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
-		<property name="driver" value="oracle.jdbc.OracleDriver"/>
+		<property name="driverClass" value="oracle.jdbc.OracleDriver"/>
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521/xe"/>
 		<property name="username" value="hr"/>
 		<property name="password" value="hr"/>
@@ -96,6 +103,8 @@
 	
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
+   		<property name="persistenceProviderClass" value="org.hibernate.jpa.HibernatePersistenceProvider"/>
+
 		<property name="packagesToScan" value="com.cg.entities"/>
 		<property name="jpaPropertyMap">
 			<map>
