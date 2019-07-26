@@ -52,4 +52,54 @@ REpresentational State Transfer
     server.port=5000
     ```
 
-5.  
+5.  Create new Controller class `com.cg.controllers.HomeController`
+
+    ```java
+    @RestController
+    @RequestMapping("/test")
+    public class HomeController {
+
+        /**
+        * Process GET REQUEST on localhost:5000/test/	
+        * @return
+        */
+        @GetMapping("/")
+        public String testGet() {
+            return "This is GET request";
+        }
+
+        /**
+        * Process POST REQUEST on localhost:5000/test/	
+        * @return
+        */
+        
+        @PostMapping("/")
+        public String testPost() {
+            return "This is POST request";
+        }
+        
+        @PutMapping("/")
+        public String testPut() {
+            return "This is PUT request";
+        }
+        
+        @DeleteMapping("/")
+        public String testDelete() {
+            return "This is DELETE request";
+        }   
+        
+    }
+    ```
+
+6.  Run application as **Java Application**
+
+7.  Launch _Postman_ to test the application.
+
+    Method type: GET
+    
+    URL:         http://localhost:5000/test/
+    
+    Click SEND button
+
+    Repeate the above process for all other method types: PUT, POST, DELETE
+
