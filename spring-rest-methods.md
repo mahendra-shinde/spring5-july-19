@@ -194,4 +194,13 @@
     ```
 
 10. Run application and test using Postman.
-    
+    follow the steps in given screenshot:
+    ![](assets/screen1.png)
+
+11. Try hitting following URL to view the results:
+
+    http://localhost:5000/countries/continent-north america
+
+    or
+    http://localhost:5000/countries/code/CA
+
