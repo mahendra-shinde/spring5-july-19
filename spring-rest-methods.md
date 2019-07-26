@@ -202,5 +202,13 @@
     http://localhost:5000/countries/continent-north america
 
     or
+    
     http://localhost:5000/countries/code/CA
 
+12. Try updating capital city of canada using Postman :
+
+    ![](assets/screen2.png)
+
+    Now, Test following URL again:
+
+    http://localhost:5000/countries/code/CA
