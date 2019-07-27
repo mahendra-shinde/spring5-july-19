@@ -73,3 +73,32 @@
     http://localhost:5000/countries/continent-europe
 
     Expected:   You must be getting Server Error 500
+
+6.  Create a new Global Exception Handler class `com.cg.exceptions.AppExceptionHandler`
+
+    ```java
+    //This class is NOT a controller, but an Assistant to ALL controller within Application
+    @ControllerAdvice 
+    public class AppExceptionHandler {
+
+        /** 
+        * Capture all Exceptions of type ApplicationException,
+        * and return a new HttpResponse: Message from Exception and Http Status CODE 404
+        * @param exception
+        * @return
+        */
+        @ExceptionHandler({ApplicationException.class})
+        public ResponseEntity<String> handleError(ApplicationException exception){
+            System.out.println("Exception handled");
+            return new ResponseEntity<>(exception.getMessage(),HttpStatus.NOT_FOUND);
+        }
+    }
+    ```
+
+7.   Run the Application.java and Test following URLs (Use Web Browser)
+
+    http://localhost:5000/countries/code/UK
+
+    http://localhost:5000/countries/continent-europe
+
+    Expected:   You must be getting Http status 404 with Exception message.
