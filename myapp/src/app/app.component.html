@@ -1,0 +1,13 @@
+<div>
+  <h2>List of Countries in ASIA</h2>
+  <table>
+    <tr *ngFor="let c of countries">
+      <td>{{c.code}}</td>
+      <td>{{c.name}}</td>
+      <td>{{c.continent}}</td>
+
+    </tr>
+  </table>
+</div>
+
+<router-outlet></router-outlet>
